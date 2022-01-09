@@ -48,6 +48,19 @@ public class LinkedList {
 
     }
     
+    public int  middle(ListNode head){
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while(fast != null && fast.next != null){
+            
+            fast= fast.next.next;
+            slow = slow.next;
+        }
+
+        return slow.val;
+    }
+    
     public static void main(String[] args){
         
         LinkedList ll = new LinkedList();
@@ -59,8 +72,11 @@ public class LinkedList {
         head = ll.addAtTheEnd(6, head);
         head = ll.addAtTheEnd(7, head);
         head = ll.addAtTheEnd(8, head);
-        head = ll.reverse(head);
+        // head = ll.reverse(head);
         ll.traverse(head);
+        System.out.println("Ceneter element of a linkedList");
+        int middle =ll.middle(head);
+        System.out.println(middle);
         
     }
 }
