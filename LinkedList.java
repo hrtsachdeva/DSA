@@ -25,6 +25,28 @@ public class LinkedList {
         traverse(head.next);
 
     }
+
+    public ListNode reverse(ListNode head){
+        if(head == null) {
+            return head;
+        }
+  
+        // last node or only one node
+        if(head.next == null) {
+            return head;
+        }
+  
+        ListNode newHeadNode = reverse(head.next);
+  
+        // change references for middle chain
+        head.next.next = head;
+        head.next = null;
+  
+        // send back new head node in every recursion
+        return newHeadNode;
+
+
+    }
     
     public static void main(String[] args){
         
@@ -37,6 +59,7 @@ public class LinkedList {
         head = ll.addAtTheEnd(6, head);
         head = ll.addAtTheEnd(7, head);
         head = ll.addAtTheEnd(8, head);
+        head = ll.reverse(head);
         ll.traverse(head);
         
     }
