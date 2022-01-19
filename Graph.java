@@ -30,7 +30,7 @@ public class Graph{
         while(queue.size()!=0){
             s = queue.poll();
 
-            System.out.println(s+"-");
+            System.out.println(s);
             Iterator<Integer> itr = adj[s].listIterator();
 
             while(itr.hasNext()){
@@ -42,6 +42,30 @@ public class Graph{
             }
         }
         
+    }
+
+    public void dfsUtil(int s, boolean[] visited){
+        visited[s]= true;
+        System.out.println(s);
+
+        Iterator<Integer> i = adj[s].listIterator();
+
+        while(i.hasNext()){
+            int j = i.next();
+            if(!visited[j]){
+                dfsUtil(j, visited);
+            }
+        }
+
+
+    }
+
+    public void dfs(int s){
+        boolean[] visited = new boolean[this.V];
+
+       
+
+        dfsUtil(s,visited);
     }
     
 
@@ -58,6 +82,8 @@ public class Graph{
 
 
         g.bfs(2);
+
+        g.dfs(2);
 
 
     }
