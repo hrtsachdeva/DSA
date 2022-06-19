@@ -228,6 +228,44 @@ static class TreeInfo{
 
         return isSubTree(mainTreeRoot.left, subTreeRoot) || isSubTree(mainTreeRoot.right, subTreeRoot);
     }
+
+    public Node mirrorImageRecursively(Node root){
+        if(root == null){
+            return null;
+        }
+
+        Node left = mirrorImageRecursively(root.left);
+        Node right = mirrorImageRecursively(root.right);
+        root.left = right ;
+        root.right = left;
+        return root;
+    }
+
+    public void mirrorImageItetrative(Node root){
+        if(root == null){
+            return;
+        }
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+
+        while(!queue.isEmpty()){
+            Node currentNode = queue.remove();
+
+            //swap left child with the right one 
+            Node temp = currentNode.left;
+            currentNode.left = currentNode.right;
+            currentNode.right = temp;
+
+            if(currentNode.left != null){
+                queue.add(currentNode.left);
+            }
+
+            if(currentNode.right != null){
+                queue.add(currentNode.right);
+            }
+        }
+        
+    }
 }
   public static void main(String[] args) {
       int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
@@ -258,7 +296,7 @@ static class TreeInfo{
       binaryTree.reverseLevelOrderTraversal(root);
 
       //Count of Nodes 
-      System.out.println("/n Count of nodes: "+binaryTree.countOfNodes(root));
+      System.out.println("\n Count of nodes: "+binaryTree.countOfNodes(root));
 
       //Sum of Nodes 
       System.out.println("Sum of nodes: "+binaryTree.sumOfNodes(root));
@@ -268,6 +306,12 @@ static class TreeInfo{
       
       //Diameter of Tree 
       System.out.println("Diamerter of tree: "+binaryTree.diameterOfTree(root));
+
+      //mirror Image of a BTree
+    //   Node tmpRoot =binaryTree.mirrorImageRecursively(root);
+    // binaryTree.preOrderTraverse(tmpRoot);
+    // binaryTree.mirrorImageItetrative(root);
+    // binaryTree.preOrderTraverse(root);
 
   }  
 }
