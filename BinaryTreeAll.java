@@ -25,11 +25,60 @@ static class Node{
 
         return newNode;
     }
+
+    //traversals 
+    public static void preOrderTraverse(Node root){
+        if(root== null){
+            return ;
+        }else {
+            System.out.println(root.data);
+            preOrderTraverse(root.left);
+            preOrderTraverse(root.right);
+        }
+
+    }
+
+    public static void inOrderTraversal(Node root){
+        if(root== null){
+            return ;
+        }else {
+            inOrderTraversal(root.left);
+            System.out.println(root.data);
+            inOrderTraversal(root.right);
+        }
+
+    }
+
+    public static void postOrderTraversal(Node root){
+        if(root== null){
+            return ;
+        }else {
+            postOrderTraversal(root.left);
+            postOrderTraversal(root.right);
+            System.out.println(root.data);
+        }
+
+    }
 }
   public static void main(String[] args) {
       int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
+      
+      //Build a tree
       BinaryTree binaryTree = new BinaryTree();
       Node root = binaryTree.buildTree(nodes);
-      System.out.println(root.data);
+      System.out.println("Root Node "+ root.data);
+
+    //   //PreOrder traversal
+      System.out.println("PreOrder Traversal");
+      binaryTree.preOrderTraverse(root);
+
+      //InOrder traversal
+      System.out.println("InOrder Traversal");
+      binaryTree.inOrderTraversal(root);
+
+    //   //PostOrder traversal
+      System.out.println("PostOrder Traversal");
+      binaryTree.postOrderTraversal(root);
+
   }  
 }
