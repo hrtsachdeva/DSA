@@ -101,6 +101,29 @@ static class Node{
         int rightCount = countOfNodes(root.right);
         return leftCount + rightCount +1 ;
     }  
+
+    public int sumOfNodes(Node root){
+        if(root == null){ 
+            return 0;
+        }
+        int leftSum = sumOfNodes(root.left);
+        int rightSum = sumOfNodes(root.right);
+        return leftSum + rightSum + root.data;
+    }  
+
+    public int heightOfTree(Node root){
+        if(root == null){
+            return 0;
+        }else {
+            int leftHeight = heightOfTree(root.left);
+            int rightHeight = heightOfTree(root.right);
+
+            int max = leftHeight >= rightHeight ? leftHeight: rightHeight;
+            return max+1;
+
+        }
+    }
+
 }
   public static void main(String[] args) {
       int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
@@ -128,6 +151,12 @@ static class Node{
 
       //Count of Nodes 
       System.out.println("Count of nodes: "+binaryTree.countOfNodes(root));
+
+      //Sum of Nodes 
+      System.out.println("Sum of nodes: "+binaryTree.sumOfNodes(root));
+
+      //Height of Nodes 
+      System.out.println("Height of tree: "+binaryTree.heightOfTree(root));
       
 
   }  
