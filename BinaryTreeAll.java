@@ -14,7 +14,7 @@ static class Node{
         this.right = null;
     }
 }
-
+// used to claculate diameter
 static class TreeInfo{
     int diameter;
     int height;
@@ -22,6 +22,17 @@ static class TreeInfo{
     TreeInfo(int diameter, int height){
         this.diameter = diameter;
         this.height = height;
+    }
+}
+
+//used in calculatng top view and bottom view of a tree
+static class Pair{
+    int hd;//horizontal distance
+    Node node;
+
+    Pair(int hd, Node node){
+        this.hd = hd;
+        this.node = node;
     }
 }
 
@@ -331,6 +342,57 @@ static class TreeInfo{
     }
     }
 
+    public void topViewOfTree(Node root){
+        Queue<Pair> queue = new ArrayDeque<Pair>();
+        HashMap<Integer,Integer> hashMap = new HashMap<Integer,Integer>();
+
+        queue.add(new Pair(0,root));
+
+        while(!queue.isEmpty()){
+            Pair currentPair = queue.remove();
+            if(!hashMap.containsKey(currentPair.hd)){
+                hashMap.put(currentPair.hd, currentPair.node.data);
+            }
+
+            if(currentPair.node.left!= null){
+                queue.add(new Pair(currentPair.hd-1, currentPair.node.left));
+            }
+
+            if(currentPair.node.right!= null){
+                queue.add(new Pair(currentPair.hd+1, currentPair.node.right));
+            }
+        }
+
+        for(Map.Entry<Integer,Integer> entry:hashMap.entrySet()){
+            System.out.println(entry.getValue());
+        }
+    }
+
+    public void bottomViewOfTree(Node root){
+        Queue<Pair> queue = new ArrayDeque<Pair>();
+        HashMap<Integer,Integer> hashMap = new HashMap<Integer,Integer>();
+
+        queue.add(new Pair(0,root));
+
+        while(!queue.isEmpty()){
+            Pair currentPair = queue.remove();
+            hashMap.put(currentPair.hd, currentPair.node.data);
+    
+
+            if(currentPair.node.left!= null){
+                queue.add(new Pair(currentPair.hd-1, currentPair.node.left));
+            }
+
+            if(currentPair.node.right!= null){
+                queue.add(new Pair(currentPair.hd+1, currentPair.node.right));
+            }
+        }
+
+        for(Map.Entry<Integer,Integer> entry:hashMap.entrySet()){
+            System.out.println(entry.getValue());
+        }
+    }
+    
     public int countLeafNode(Node root){
         if(root== null){
             return 0;
@@ -400,9 +462,19 @@ static class TreeInfo{
      System.out.println("Left image of a b tree");
      binaryTree.rightViewOfTree(root);
 
+     //TopView of a tree
+     System.out.println("Top view of a b tree");
+     binaryTree.topViewOfTree(root);
+
+     //BottomView of a tree
+     System.out.println("Bottom view of a b tree");
+     binaryTree.bottomViewOfTree(root);
+
      //leaf node of a tree 
      System.out.println("Leaf node of a tree ");
      binaryTree.countLeafNode(root);
+
+
 
   }  
 }
