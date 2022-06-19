@@ -299,6 +299,52 @@ static class TreeInfo{
             }
         }
     }
+
+    public void rightViewOfTree(Node root){
+        if (root == null)
+        return;
+
+    Queue<Node> queue = new LinkedList<>();
+    queue.add(root);
+
+    while (!queue.isEmpty()) {
+        // number of nodes at current level
+        int n = queue.size();
+
+        // Traverse all nodes of current level
+        for (int i = 1; i <= n; i++) {
+            Node temp = queue.poll();
+
+            // Print the left most element at
+            // the level
+            if (i == n)
+                System.out.print(temp.data + " ");
+
+            // Add left node to queue
+            if (temp.left != null)
+                queue.add(temp.left);
+
+            // Add right node to queue
+            if (temp.right != null)
+                queue.add(temp.right);
+        }
+    }
+    }
+
+    public int countLeafNode(Node root){
+        if(root== null){
+            return 0;
+        }else if(root.left == null  && root.right == null){
+            System.out.println("Leaf node "+ root.data);
+            return 1;
+        }
+        
+        else{
+            int left = countLeafNode(root.left);
+            int right = countLeafNode(root.right);
+            return left+right;
+        }
+    }
 }
   public static void main(String[] args) {
       int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
@@ -349,6 +395,14 @@ static class TreeInfo{
     //Left image of a tree
     System.out.println("Left image of a b tree");
     binaryTree.leftViewOfTree(root);
+
+     //Right image of a tree
+     System.out.println("Left image of a b tree");
+     binaryTree.rightViewOfTree(root);
+
+     //leaf node of a tree 
+     System.out.println("Leaf node of a tree ");
+     binaryTree.countLeafNode(root);
 
   }  
 }
