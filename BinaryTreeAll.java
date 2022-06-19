@@ -29,7 +29,7 @@ static class Node{
         return newNode;
     }
 
-    //traversals 
+    //traversals , preOrder , postOrder , inOrder works on DFS ,all having complexcity of O(n)
     public static void preOrderTraverse(Node root){
         if(root== null){
             return ;
@@ -63,6 +63,7 @@ static class Node{
 
     }
 
+    // it is based on BFS  ans uses Queue for its implementation , complexcity = O(n)
     public static void levelOrderTraverse(Node root){
         Queue<Node> queue = new LinkedList<Node>();
         queue.add(root);
