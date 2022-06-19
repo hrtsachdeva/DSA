@@ -101,7 +101,46 @@ static class TreeInfo{
         }
     }
 
+    //Difference from normal level order traversal
+    // * Instead of printing add the element to the Stack
+    // * Traverse Right part first before the left one 
+    public static void reverseLevelOrderTraversal(Node root){
+        Queue<Node> queue = new LinkedList<Node>();
+        Stack<Integer> stack = new Stack<Integer>();
+        queue.add(root);
+        queue.add(null);
 
+        while(!queue.isEmpty()){
+            Node currentNode = queue.remove();
+            if(currentNode == null){
+                System.out.println();
+                if(queue.isEmpty()){
+                    break;
+                }else {
+                    queue.add(null);
+                }
+            }else{
+                // System.out.print(currentNode.data+" ");
+                stack.push(currentNode.data);
+                if(currentNode.right != null){
+                    queue.add(currentNode.right);
+                }
+                if(currentNode.left != null){
+                    queue.add(currentNode.left);
+                }
+
+                
+            }
+        }
+
+        // Now pop all items from stack one by one and print them
+        while (!stack.isEmpty())
+        {
+            int data = stack.peek();
+            System.out.print(data + " ");
+            stack.pop();
+        }
+    }
     //other basic btree problems
     public int countOfNodes(Node root){
         if(root == null){ 
@@ -214,8 +253,12 @@ static class TreeInfo{
       System.out.println("LevelOrder Traversal");
       binaryTree.levelOrderTraverse(root);
 
+      //Reverse LevelOrder Traversal
+      System.out.println("Reverse LevelOrder Traversal");
+      binaryTree.reverseLevelOrderTraversal(root);
+
       //Count of Nodes 
-      System.out.println("Count of nodes: "+binaryTree.countOfNodes(root));
+      System.out.println("/n Count of nodes: "+binaryTree.countOfNodes(root));
 
       //Sum of Nodes 
       System.out.println("Sum of nodes: "+binaryTree.sumOfNodes(root));
