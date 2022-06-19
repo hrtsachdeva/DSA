@@ -154,6 +154,41 @@ static class TreeInfo{
 
     }
 
+    public boolean isIdentical(Node mainTreeRoot, Node subTreeRoot){
+        //check if both nodes are leaf
+        if(mainTreeRoot == null && subTreeRoot == null) {
+            return true;
+        }
+
+        //check if any one is not leaf
+        if(mainTreeRoot == null || subTreeRoot == null){
+            return false;
+        }
+        // now if values are same we will be moving to left part and right part of the tree, else returning false directly
+        if(mainTreeRoot.data == subTreeRoot.data){
+        return isIdentical(mainTreeRoot.left, subTreeRoot.left) && isIdentical(mainTreeRoot.right, subTreeRoot.right);
+        }
+
+        return false;
+    }
+
+    public boolean isSubTree(Node mainTreeRoot, Node subTreeRoot){
+        if(subTreeRoot == null){
+            return true;
+        }
+
+        if(mainTreeRoot == null){
+            return false;
+        }
+
+        if(mainTreeRoot.data == subTreeRoot.data){
+                if(isIdentical(mainTreeRoot,subTreeRoot)){
+                    return true;
+                }
+        }
+
+        return isSubTree(mainTreeRoot.left, subTreeRoot) || isSubTree(mainTreeRoot.right, subTreeRoot);
+    }
 }
   public static void main(String[] args) {
       int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
