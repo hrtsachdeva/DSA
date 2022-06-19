@@ -266,6 +266,39 @@ static class TreeInfo{
         }
         
     }
+
+    //left view of the tree, used level Order traversing based on BFS (Queue)
+
+    public void leftViewOfTree(Node root){
+        if (root == null)
+            return;
+ 
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+ 
+        while (!queue.isEmpty()) {
+            // number of nodes at current level
+            int n = queue.size();
+ 
+            // Traverse all nodes of current level
+            for (int i = 1; i <= n; i++) {
+                Node temp = queue.poll();
+ 
+                // Print the left most element at
+                // the level
+                if (i == 1)
+                    System.out.print(temp.data + " ");
+ 
+                // Add left node to queue
+                if (temp.left != null)
+                    queue.add(temp.left);
+ 
+                // Add right node to queue
+                if (temp.right != null)
+                    queue.add(temp.right);
+            }
+        }
+    }
 }
   public static void main(String[] args) {
       int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
@@ -296,7 +329,7 @@ static class TreeInfo{
       binaryTree.reverseLevelOrderTraversal(root);
 
       //Count of Nodes 
-      System.out.println("\n Count of nodes: "+binaryTree.countOfNodes(root));
+      System.out.println("\nCount of nodes: "+binaryTree.countOfNodes(root));
 
       //Sum of Nodes 
       System.out.println("Sum of nodes: "+binaryTree.sumOfNodes(root));
@@ -312,6 +345,10 @@ static class TreeInfo{
     // binaryTree.preOrderTraverse(tmpRoot);
     // binaryTree.mirrorImageItetrative(root);
     // binaryTree.preOrderTraverse(root);
+
+    //Left image of a tree
+    System.out.println("Left image of a b tree");
+    binaryTree.leftViewOfTree(root);
 
   }  
 }
