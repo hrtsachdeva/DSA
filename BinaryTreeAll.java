@@ -15,6 +15,16 @@ static class Node{
     }
 }
 
+static class TreeInfo{
+    int diameter;
+    int height;
+
+    TreeInfo(int diameter, int height){
+        this.diameter = diameter;
+        this.height = height;
+    }
+}
+
  static class BinaryTree{
     static int idx =-1;
     public static Node buildTree(int nodes[]){
@@ -124,6 +134,26 @@ static class Node{
         }
     }
 
+    TreeInfo diameterOfTree(Node root){
+        if(root == null){
+            return  new TreeInfo(0, 0);
+        }
+        
+        TreeInfo left = diameterOfTree(root.left);
+        TreeInfo right = diameterOfTree(root.right);
+
+        int dia1 = left.diameter;
+        int dia2 = right.diameter;
+        int dia3 = left.height + right.height +1;
+
+        int myheight = Math.max(left.height,right.height)+1;
+        int myDia = Math.max(dia1, Math.max(dia2, dia3));
+
+        return new TreeInfo(myDia, myheight);
+
+
+    }
+
 }
   public static void main(String[] args) {
       int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
@@ -155,9 +185,11 @@ static class Node{
       //Sum of Nodes 
       System.out.println("Sum of nodes: "+binaryTree.sumOfNodes(root));
 
-      //Height of Nodes 
+      //Height of Tree
       System.out.println("Height of tree: "+binaryTree.heightOfTree(root));
       
+      //Diameter of Tree 
+      System.out.println("Diamerter of tree: "+binaryTree.diameterOfTree(root));
 
   }  
 }
